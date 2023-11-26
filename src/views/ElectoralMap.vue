@@ -2,15 +2,16 @@
 import { ref, onMounted } from "vue";
 import TabButton from "@/components/Common/TabButton.vue";
 import TaiwanOptions from "@/components/AreaSelected/index.vue";
+import VoteOverview from "@/components/VoteOverview/index.vue";
 import useCsvData from "@/utils/useCsvData";
-// import useCsvData from "@/assets/csvData/useCsvData.js";
+import { useVoteDataStore } from "@/stores/voteData";
 // 2020 / 2016
+const store = useVoteDataStore();
 const year = ref("2020");
-const { getBaseData, getVoteData, getBallotData } = useCsvData();
+const { getAllVoteData } = useCsvData();
 onMounted(async () => {
-  await getBaseData(year.value);
-  await getVoteData(year.value);
-  await getBallotData(year.value);
+  await getAllVoteData(year.value);
+  store.isLoadAllData = true;
 });
 </script>
 <template>
@@ -27,6 +28,9 @@ onMounted(async () => {
         第10任 立法委員選舉
       </TabButton>
     </div>
-    <TaiwanOptions></TaiwanOptions>
+    <TaiwanOptions :class="['mb-[20px]']"></TaiwanOptions>
+    <div>
+      <VoteOverview></VoteOverview>
+    </div>
   </div>
 </template>

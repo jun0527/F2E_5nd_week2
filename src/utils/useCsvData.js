@@ -7,6 +7,8 @@ export default function useCsvData() {
       elbase: "../assets/csvData/2020/elbase.csv",
       elctks: "../assets/csvData/2020/elctks.csv",
       elprof: "../assets/csvData/2020/elprof.csv",
+      elpaty: "../assets/csvData/2020/elpaty.csv",
+      elcand:  "../assets/csvData/2020/elcand.csv",
     }
   };
   const getCsvData = async (year, name) => {
@@ -31,13 +33,23 @@ export default function useCsvData() {
   };
   const getBaseData = async (year) => {
     const elbase = await getCsvData(year, "elbase");
+    const voteDefault = {
+      vote1: {
+        num: 0,
+        color: "#DFA175"
+      },
+      vote2: {
+        num: 0,
+        color: "#8894D8"
+      },
+      vote3: {
+        num: 0,
+        color: "#84CB98"
+      },
+    }
     const baseData = {};
     baseData.cityList = [];
-    baseData.vote = {
-      vote1: 0,
-      vote2: 0,
-      vote3: 0
-    };
+    baseData.vote = _.cloneDeep(voteDefault);
     const dataList = _.map(elbase.split(/\n|\r\n/), (item) =>
       item.split(/","|"/).join(" ").trim().split(" ")
     );
@@ -56,11 +68,7 @@ export default function useCsvData() {
       const city = baseData.cityList[cityIndex];
       if (districtNum === "000") {
         city.name = data[5];
-        city.vote = {
-          vote1: 0,
-          vote2: 0,
-          vote3: 0
-        };
+        city.vote = _.cloneDeep(voteDefault);
         return;
       }
       if (getIndex(city.districts, districtNum) === -1) {
@@ -73,28 +81,20 @@ export default function useCsvData() {
       const district = city.districts[districtIndex];
       if (villageNum === "0000") {
         district.name = data[5];
-        district.vote = {
-          vote1: 0,
-          vote2: 0,
-          vote3: 0
-        };
+        district.vote = _.cloneDeep(voteDefault);
       } else {
         const obj = {};
         obj.num = villageNum;
         obj.name = data[5];
-        obj.vote = {
-          vote1: 0,
-          vote2: 0,
-          vote3: 0
-        };
+        obj.vote = _.cloneDeep(voteDefault)
         district.villages.push(obj);
       }
     });
-    store.voteBase = baseData;
+    return baseData;
   };
   const getVoteData = async (year) => {
+    const voteData = await getBaseData(year);
     const voteCsvData = await getCsvData(year, "elctks");
-    const voteData = _.cloneDeep(store.voteBase);
     const dataList = _.map(voteCsvData.split(/\n|\r\n/), (item) =>
       item.split(/","|"/).join(" ").trim().split(" ")
     );
@@ -105,25 +105,25 @@ export default function useCsvData() {
       const villageNum = data[4];
       const voteNum = parseInt(data[7]);
       if (cityNum === "00000") {
-        voteData.vote[`vote${data[6]}`] += voteNum;
+        voteData.vote[`vote${data[6]}`].num += voteNum;
         return;
       }
       const cityIndex = getIndex(voteData.cityList, cityNum);
       const city = voteData.cityList[cityIndex];
       if (districtNum === "000") {
-        city.vote[`vote${data[6]}`] += voteNum;
+        city.vote[`vote${data[6]}`].num += voteNum;
         return;
       }
       const districtIndex = getIndex(city.districts, districtNum);
       const district = city.districts[districtIndex];
       if (villageNum === "0000") {
-        district.vote[`vote${data[6]}`] += voteNum;
+        district.vote[`vote${data[6]}`].num += voteNum;
         return;
       }
       const villageIndex = getIndex(district.villages, villageNum);
       const village = district.villages[villageIndex];
       if (data[5] === "0000") {
-        village.vote[`vote${data[6]}`] += voteNum;
+        village.vote[`vote${data[6]}`].num += voteNum;
       }
     });
     store.voteData = voteData;
@@ -141,10 +141,49 @@ export default function useCsvData() {
       voterTurnout: totalBallot[18],
     }
   }
+  const getPartyData = async (year) => {
+    const elpatyData = await getCsvData(year, "elpaty");
+    const dataList = _.map(elpatyData.split(/\n|\r\n/), (item) =>
+      item.split(/","|"/).join(" ").trim().split(" ")
+    );
+    const partData = {};
+    _.forEach(dataList, (data) => {
+      if (data.length !== 2) return;
+      partData[data[0]] = data[1];
+    })
+    return partData;
+  }
+  const getCandidateData = async (year) => {
+    const partData = await getPartyData(year);
+    const elcandData = await getCsvData(year, "elcand");
+    const dataList = _.map(elcandData.split(/\n|\r\n/), (item) =>
+      item.split(/","|"/).join(" ").trim().split(" ")
+    );
+    const candidateData = {};
+    _.forEach(dataList, (data) => {
+      if (data.length < 14) return;
+      const keys = Object.keys(candidateData);
+      if (!keys.includes(`vote${data[5]}`)) {
+        candidateData[`vote${data[5]}`] = {};
+      }
+      const candidate = candidateData[`vote${data[5]}`];
+      if (data[16] === "Y") {
+        candidate.deputy = data[6];
+        return;
+      }
+      candidate.partId = data[7];
+      candidate.partName = partData[data[7]]; 
+      candidate.name = data[6];
+    })
+    store.candidateData = candidateData;
+  }
+  const getAllVoteData = async (year) => {
+    await getVoteData(year);
+    await getBallotData(year);
+    await getCandidateData(year);
+  }
   return {
-    getBaseData,
-    getVoteData,
-    getBallotData,
+    getAllVoteData,
     getCsvData
   };
 }
