@@ -3,12 +3,15 @@ import { useVoteDataStore } from "@/stores/voteData";
 export default function useCsvData() {
   const store = useVoteDataStore();
   const urlList = {
-    elbase: "../assets/csvData/elbase.csv",
-    president: "../assets/csvData/president.csv"
+    2020: {
+      elbase: "../assets/csvData/2020/elbase.csv",
+      elctks: "../assets/csvData/2020/elctks.csv",
+      elprof: "../assets/csvData/2020/elprof.csv",
+    }
   };
-  const getCsvData = async (name) => {
+  const getCsvData = async (year, name) => {
     let csvData = "";
-    const csvUrl = new URL(urlList[name], import.meta.url).href;
+    const csvUrl = new URL(_.get(urlList, `${year}.${name}`), import.meta.url).href;
     await new Promise((resolve) => {
       fetch(csvUrl)
         .then((res) => {
@@ -26,8 +29,8 @@ export default function useCsvData() {
   const getIndex = (array, num) => {
     return _.findIndex(array, (item) => item.num === num);
   };
-  const getBaseData = async () => {
-    const elbase = await getCsvData("elbase");
+  const getBaseData = async (year) => {
+    const elbase = await getCsvData(year, "elbase");
     const baseData = {};
     baseData.cityList = [];
     baseData.vote = {
@@ -89,8 +92,8 @@ export default function useCsvData() {
     });
     store.voteBase = baseData;
   };
-  const getVoteData = async (name) => {
-    const voteCsvData = await getCsvData(name);
+  const getVoteData = async (year) => {
+    const voteCsvData = await getCsvData(year, "elctks");
     const voteData = _.cloneDeep(store.voteBase);
     const dataList = _.map(voteCsvData.split(/\n|\r\n/), (item) =>
       item.split(/","|"/).join(" ").trim().split(" ")
@@ -125,9 +128,22 @@ export default function useCsvData() {
     });
     store.voteData = voteData;
   };
+  const getBallotData = async (year) => {
+    const ballotCsvData = await getCsvData(year, "elprof");
+    const dataList = _.map(ballotCsvData.split(/\n|\r\n/), (item) =>
+      item.split(/","|"/).join(" ").trim().split(" ")
+    );
+    const totalBallot = _.find(dataList, (data) => data[0] + data[1] === "00000")
+    store.ballotData = {
+      valid: totalBallot[6],
+      invalid: totalBallot[7],
+      total: totalBallot[8]
+    }
+  }
   return {
     getBaseData,
     getVoteData,
+    getBallotData,
     getCsvData
   };
 }

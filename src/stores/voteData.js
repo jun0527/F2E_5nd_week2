@@ -3,11 +3,12 @@ import { defineStore } from "pinia";
 import _ from "lodash"
 
 export const useVoteDataStore = defineStore("voteData", () => {
-  const voteBase = ref([]);
+  const voteBase = ref({});
   const voteData = ref({});
   const city = ref("");
   const district = ref("");
   const village = ref("")
+  const ballotData = ref({});
 
   watch(city, (newVal, oldVal) => {
     if (!_.isEqual(newVal, oldVal)) {
@@ -36,17 +37,19 @@ export const useVoteDataStore = defineStore("voteData", () => {
   });
   const cityVote = computed(() => {
     const index = getIndex(voteData.value.cityList, city.value);
-    const cityData = voteData.value.cityList[index];
+    if (index === -1) return null
+    const cityData = voteData?.value?.cityList[index];
     return cityData ? cityData.vote : null;
   });
   const districtVote = computed(() => {
     const index = getIndex(districts.value, district.value);
-    const districtData = districts.value[index];
+    if (index === -1) return null
+    const districtData = districts?.value[index];
     return districtData ? districtData.vote : null;
   });
   const villageVote = computed(() => {
     const index = getIndex(villages.value, village.value);
-    const villageData = villages.value[index];
+    const villageData = villages?.value[index];
     return villageData ? villageData.vote : null;
   });
 
@@ -56,6 +59,7 @@ export const useVoteDataStore = defineStore("voteData", () => {
     city,
     district,
     village,
+    ballotData,
 
     districts,
     villages,
