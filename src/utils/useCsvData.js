@@ -137,7 +137,8 @@ export default function useCsvData() {
     store.ballotData = {
       valid: totalBallot[6],
       invalid: totalBallot[7],
-      total: totalBallot[8]
+      total: totalBallot[8],
+      voterTurnout: totalBallot[18],
     }
   }
   return {
