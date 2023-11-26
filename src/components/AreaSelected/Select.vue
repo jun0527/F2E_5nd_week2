@@ -65,6 +65,7 @@ const buttonVal = computed(() => {
       :style="{ width: props.width }"
       :class="[
         'max-h-[216px] overflow-y-auto',
+        'bg-white',
         'border border-darkBlue rounded-[8px]',
         'mt-[4px]'
       ]"
