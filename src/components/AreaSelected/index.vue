@@ -5,6 +5,9 @@ import _ from "lodash";
 import Select from "./Select.vue";
 import Button from "@/components/Common/Button.vue";
 
+defineOptions({
+  name: "AreaSelected"
+});
 const store = useVoteDataStore();
 const city = computed({
   get: () => store.city,
@@ -28,11 +31,6 @@ const voteData = computed(() => store.voteData);
 const cityList = computed(() => voteData.value.cityList);
 const districts = computed(() => store.districts);
 const villages = computed(() => store.villages);
-</script>
-<script>
-export default {
-  name: "AreaSelected"
-};
 </script>
 <template>
   <div :class="['flex items-center gap-[20px]']">
