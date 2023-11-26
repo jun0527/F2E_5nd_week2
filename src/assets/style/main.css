@@ -5,6 +5,15 @@
   body {
     @apply text-black font-NotoSans font-normal text-[16px] leading-[1.4] bg-body;
   }
+  ::-webkit-scrollbar {
+    @apply w-[6px] bg-[transparent]
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#737373] rounded-full
+  }
+  ::-webkit-scrollbar-button {
+    @apply h-[4px]
+  }
 }
 
 @layer components {

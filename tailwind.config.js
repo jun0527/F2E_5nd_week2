@@ -22,7 +22,7 @@ module.exports = {
       // blue_hover: "#7A85C2",
       // blue_active: "#6D76AD",
       // blue_dark: "#666FA2",
-      // blue_dark_hover: "#525982",
+      blue_dark_hover: "#525982",
       // blue_dark_active: "#3D4361",
       // blue_darker: "#30344C",
       // darkBlue
@@ -33,7 +33,7 @@ module.exports = {
       // darkBlue_hover: "#222942",
       // darkBlue_active: "#1E253A",
       // darkBlue_dark: "#1D2337",
-      // darkBlue_dark_hover: "#171C2C",
+      darkBlue_dark_hover: "#171C2C",
       // darkBlue_dark_active: "#111521",
       // darkBlue_darker: "#0D101A",
       // brow
@@ -54,11 +54,11 @@ module.exports = {
       black: "#000000",
       // white
       white: "#FFFFFF",
-      // white_hover: "#E6E6E6",
-      // white_active: "#CCCCCC",
+      white_hover: "#E6E6E6",
+      white_active: "#CCCCCC",
       white_dark: "#BFBFBF",
       // white_dark_hover: "#999999",
-      // white_dark_active: "#737373",
+      white_dark_active: "#737373",
       // white_darker: "#595959",
       transparent: "transparent",
       body: "#F5F5F5"
