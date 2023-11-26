@@ -3,11 +3,12 @@
   "semi": true,
   "tabWidth": 2,
   "singleQuote": false,
-  "printWidth": 100,
   "trailingComma": "none",
 	"jsxSingleQuote": false,
 	"bracketSpacing": true,
 	"insertPragma": false,
 	"vueIndentScriptAndStyle": false,
-	"endOfLine": "auto"
+	"endOfLine": "auto",
+  "htmlWhitespaceSensitivity": "ignore",
+  "arrowParens": "avoid"
 }
