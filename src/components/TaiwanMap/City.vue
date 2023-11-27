@@ -15,13 +15,21 @@ const city = computed({
     store.city = val;
   }
 });
+const activeClass = computed(() => {
+  const colorList = {
+    "#DFA175": "text-brown_active",
+    "#84CB98": "text-green_active",
+    "#8894D8": "text-blue_active"
+  };
+  return city.value === props.data.num ? colorList[props.data.color] : "";
+});
 const useClass = computed(() => {
   const colorList = {
     "#DFA175": "text-brown hover:text-brown_hover",
     "#84CB98": "text-green hover:text-green_hover",
     "#8894D8": "text-blue hover:text-blue_hover"
   };
-  return `${colorList[props.data.color]} cursor-pointer`;
+  return `${activeClass.value} ${colorList[props.data.color]} cursor-pointer`;
 });
 </script>
 <template>
