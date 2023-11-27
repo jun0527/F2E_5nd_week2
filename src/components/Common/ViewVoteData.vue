@@ -41,7 +41,7 @@ const getVotePercentage = vote => {
     >
       {{ data.id }}
     </span>
-    <div :class="['flex flex-col w-[84px]', 'mr-[18px]']">
+    <div :class="['flex flex-col w-[94px]']">
       <span :class="['t_rg font-semibold']">
         {{ candidateData[`vote${data.id}`].partName }}
       </span>
@@ -51,7 +51,7 @@ const getVotePercentage = vote => {
       </span>
     </div>
     <div
-      :class="['w-[2px] h-[32px]', 'mr-[20px]']"
+      :class="['w-[2px] h-[32px]', 'mr-[14px]']"
       :style="{ background: data.color }"
     ></div>
     <div :class="['flex flex-col']">
