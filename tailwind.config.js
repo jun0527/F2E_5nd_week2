@@ -27,7 +27,7 @@ module.exports = {
       // blue_darker: "#30344C",
       // darkBlue
       // darkBlue_light: "#E9EAED",
-      // darkBlue_light_hover: "#DEE0E4",
+      darkBlue_light_hover: "#DEE0E4",
       // darkBlue_light_active: "#BCBEC7",
       darkBlue: "#262E49",
       // darkBlue_hover: "#222942",

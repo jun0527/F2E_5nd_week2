@@ -1,15 +1,17 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import TabButton from "@/components/Common/TabButton.vue";
 import TaiwanOptions from "@/components/AreaSelected/index.vue";
 import VoteOverview from "@/components/VoteOverview/index.vue";
 import TaiwanMap from "@/components/TaiwanMap/index.vue";
 import ViewVoteArea from "@/components/ViewVoteArea/index.vue";
+import HintArea from "@/components/HintArea/index.vue";
 import useCsvData from "@/utils/useCsvData";
 import { useVoteDataStore } from "@/stores/voteData";
 const store = useVoteDataStore();
 const year = ref("2020");
 const { getAllVoteData } = useCsvData();
+const city = computed(() => store.city);
 onMounted(async () => {
   await getAllVoteData(year.value);
   store.isLoadAllData = true;
@@ -33,7 +35,8 @@ onMounted(async () => {
     <div :class="['flex justify-between']">
       <VoteOverview></VoteOverview>
       <TaiwanMap></TaiwanMap>
-      <ViewVoteArea></ViewVoteArea>
+      <HintArea v-if="!city" :class="['w-[260px]']"></HintArea>
+      <ViewVoteArea v-else :class="['w-[260px]']"></ViewVoteArea>
     </div>
   </div>
 </template>
