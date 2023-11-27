@@ -25,7 +25,7 @@ const handleClick = () => {
         name="button"
       ></slot>
     </div>
-    <div v-if="isExtend" :class="['absolute']">
+    <div v-if="isExtend" :class="['absolute z-[2]']">
       <slot></slot>
     </div>
   </div>
