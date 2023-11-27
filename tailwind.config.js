@@ -5,7 +5,7 @@ module.exports = {
     colors: {
       // green
       // green_light: "#F3FAF5",
-      // green_light_hover: "#EDF7F0",
+      green_light_hover: "#EDF7F0",
       // green_light_active: "#D9EFDF",
       green: "#84CB98",
       green_hover: "#77B789",
@@ -16,7 +16,7 @@ module.exports = {
       // green_darker: "#2E4735",
       // blue
       // blue_light: "#F3F4FB",
-      // blue_light_hover: "#EDEFF9",
+      blue_light_hover: "#EDEFF9",
       // blue_light_active: "#DADEF3",
       blue: "#8894D8",
       blue_hover: "#7A85C2",
@@ -49,7 +49,7 @@ module.exports = {
       // brown_darker: "#4E3829",
       // black
       // black_light: "#E6E6E6",
-      // black_light_hover: "#D9D9D9",
+      black_light_hover: "#D9D9D9",
       // black_light_active: "#B0B0B0",
       black: "#000000",
       // white

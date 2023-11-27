@@ -41,18 +41,28 @@ export const useVoteDataStore = defineStore("voteData", () => {
     const index = getIndex(voteData.value.cityList, city.value);
     if (index === -1) return null
     const cityData = voteData?.value?.cityList[index];
-    return cityData ? cityData.vote : null;
+    const newData = {};
+    newData.name = cityData.name;
+    newData.vote = cityData.vote;
+    return cityData ? newData : null;
   });
   const districtVote = computed(() => {
     const index = getIndex(districts.value, district.value);
     if (index === -1) return null
     const districtData = districts?.value[index];
-    return districtData ? districtData.vote : null;
+    const newData = {};
+    newData.name = districtData.name;
+    newData.vote = districtData.vote;
+    return districtData ? newData : null;
   });
   const villageVote = computed(() => {
     const index = getIndex(villages.value, village.value);
+    if (index === -1) return null
     const villageData = villages?.value[index];
-    return villageData ? villageData.vote : null;
+    const newData = {};
+    newData.name = villageData.name;
+    newData.vote = villageData.vote;
+    return villageData ? newData : null;
   });
 
   const isLoadAllData = ref(false);
