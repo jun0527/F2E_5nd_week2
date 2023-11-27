@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import TabButton from "@/components/Common/TabButton.vue";
 import TaiwanOptions from "@/components/AreaSelected/index.vue";
 import VoteOverview from "@/components/VoteOverview/index.vue";
+import TaiwanMap from "@/components/TaiwanMap/index.vue";
 import useCsvData from "@/utils/useCsvData";
 import { useVoteDataStore } from "@/stores/voteData";
 // 2020 / 2016
@@ -29,8 +30,9 @@ onMounted(async () => {
       </TabButton>
     </div>
     <TaiwanOptions :class="['mb-[20px]']"></TaiwanOptions>
-    <div>
+    <div :class="['flex justify-between']">
       <VoteOverview></VoteOverview>
+      <TaiwanMap></TaiwanMap>
     </div>
   </div>
 </template>

@@ -25,13 +25,11 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div>
-    <svg :class="[props.svgClass, 'svg-icon']" aria-hidden="true">
-      <use
-        :xlink:href="iconName"
-        :class="[props.useClass]"
-        @click="handleClick"
-      />
-    </svg>
-  </div>
+  <svg :class="[props.svgClass, 'svg-icon']" aria-hidden="true">
+    <use
+      :xlink:href="iconName"
+      :class="[props.useClass]"
+      @click="handleClick"
+    />
+  </svg>
 </template>

@@ -33,6 +33,7 @@ export default function useCsvData() {
   };
   const getBaseData = async (year) => {
     const elbase = await getCsvData(year, "elbase");
+    const citySort = ["基隆市", "臺北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "臺中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "臺南市", "高雄市", "屏東縣", "臺東縣", "花蓮縣", "宜蘭縣", "澎湖縣", "金門縣", "連江縣"]
     const voteDefault = {
       vote1: {
         num: 0,
@@ -57,7 +58,7 @@ export default function useCsvData() {
       const cityNum = data[0] + data[1];
       const districtNum = data[3];
       const villageNum = data[4];
-      if (cityNum === "00000" || cityNum === "10000" || data.length !== 6) return;
+      if (cityNum === "00000" || cityNum === "10000" || cityNum === "09000" ||  data.length !== 6) return;
       if (getIndex(baseData.cityList, cityNum) === -1) {
         const obj = {};
         obj.num = cityNum;
@@ -90,7 +91,12 @@ export default function useCsvData() {
         district.villages.push(obj);
       }
     });
-    return baseData;
+    const newCityData = _.map(citySort, (cityName) => {
+      const index = _.findIndex(baseData.cityList, (data) => data.name === cityName);
+      return baseData.cityList[index];
+    });
+    baseData.cityList = newCityData;
+    return baseData
   };
   const getVoteData = async (year) => {
     const voteData = await getBaseData(year);
