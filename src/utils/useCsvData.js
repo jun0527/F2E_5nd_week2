@@ -4,16 +4,16 @@ export default function useCsvData() {
   const store = useVoteDataStore();
   const urlList = {
     2020: {
-      elbase: "../assets/csvData/2020/elbase.csv",
-      elctks: "../assets/csvData/2020/elctks.csv",
-      elprof: "../assets/csvData/2020/elprof.csv",
-      elpaty: "../assets/csvData/2020/elpaty.csv",
-      elcand:  "../assets/csvData/2020/elcand.csv",
+      elbase: "./csvData/2020/elbase.csv",
+      elctks: "./csvData/2020/elctks.csv",
+      elprof: "./csvData/2020/elprof.csv",
+      elpaty: "./csvData/2020/elpaty.csv",
+      elcand:  "./csvData/2020/elcand.csv",
     }
   };
   const getCsvData = async (year, name) => {
     let csvData = "";
-    const csvUrl = new URL(_.get(urlList, `${year}.${name}`), import.meta.url).href;
+    const csvUrl = _.get(urlList, `${year}.${name}`);
     await new Promise((resolve) => {
       fetch(csvUrl)
         .then((res) => {
