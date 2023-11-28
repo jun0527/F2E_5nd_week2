@@ -12,17 +12,21 @@ const districtVote = computed(() => store.districtVote);
 const villageVote = computed(() => store.villageVote);
 </script>
 <template>
-  <div>
+  <div :class="['flex lg:block', 'overflow-x-scroll']">
     <VoteDataCard
       v-if="cityVote"
       :data="cityVote"
-      :class="['mb-[20px]']"
+      :class="['flex-none mr-[20px] lg:mb-[20px] lg:mr-0']"
     ></VoteDataCard>
     <VoteDataCard
       v-if="districtVote"
       :data="districtVote"
-      :class="['mb-[20px]']"
+      :class="['flex-none mr-[20px] lg:mb-[20px] lg:mr-0']"
     ></VoteDataCard>
-    <VoteDataCard v-if="villageVote" :data="villageVote"></VoteDataCard>
+    <VoteDataCard
+      v-if="villageVote"
+      :data="villageVote"
+      :class="['flex-none ']"
+    ></VoteDataCard>
   </div>
 </template>

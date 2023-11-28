@@ -30,7 +30,11 @@ const cardClass = computed(() => {
 </script>
 <template>
   <div
-    :class="[cardClass, 'border-[2px] rounded-[8px]', 'px-[20px] py-[12px]']"
+    :class="[
+      cardClass,
+      'w-[260px] border-[2px] rounded-[8px]',
+      'px-[20px] py-[12px]'
+    ]"
   >
     <p :class="['h6 font-semibold']">{{ data.name }}</p>
     <ul>

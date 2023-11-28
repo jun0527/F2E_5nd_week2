@@ -20,7 +20,7 @@ onMounted(async () => {
 <template>
   <div
     :class="[
-      'max-w-[685px] lg:max-w-[1024px] xl:max-w-[1440px]',
+      'max-w-[1024px] xl:max-w-[1440px]',
       'px-[24px] py-[20px] md:px-[48px] md:py-[40px] mx-auto'
     ]"
   >
