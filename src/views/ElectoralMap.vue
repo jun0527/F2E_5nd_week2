@@ -32,9 +32,6 @@ onMounted(async () => {
       >
         第15任 總統副總統大選
       </TabButton>
-      <TabButton :active="year === '2016'" @click="year = '2016'">
-        第10任 立法委員選舉
-      </TabButton>
     </div>
     <TaiwanOptions :class="['mb-[20px]']"></TaiwanOptions>
     <VoteOverview :class="['block xl:hidden']"></VoteOverview>
