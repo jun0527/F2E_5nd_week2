@@ -48,7 +48,7 @@ const isExtend = ref(false);
 <template>
   <div
     :class="[
-      'max-w-[616px] xl:w-[270px]',
+      'max-w-full xl:w-[270px]',
       'bg-white',
       'rounded-[8px] mb-[20px] xl:mb-0'
     ]"
@@ -72,13 +72,16 @@ const isExtend = ref(false);
         'hidden xl:block',
         'px-[12px] pb-[12px] md:px-[20px] md:pb-[20px]',
         {
-          '!block': isExtend
+          '!block lg:!flex': isExtend
         }
       ]"
     >
       <div
         v-if="isLoadAllData"
-        :class="['flex items-center xl:block', 'mb-[20px] xl:mb-[40px]']"
+        :class="[
+          'flex items-center xl:block',
+          'mr-[20px] mb-[20px] xl:mb-[40px]'
+        ]"
       >
         <div :class="['flex items-center', 'mr-[12px] xl:mr-0 xl:mb-[20px]']">
           <PieChart
