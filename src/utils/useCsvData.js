@@ -2,18 +2,9 @@ import _ from "lodash";
 import { useVoteDataStore } from "@/stores/voteData";
 export default function useCsvData() {
   const store = useVoteDataStore();
-  const urlList = {
-    2020: {
-      elbase: "./csvData/2020/elbase.csv",
-      elctks: "./csvData/2020/elctks.csv",
-      elprof: "./csvData/2020/elprof.csv",
-      elpaty: "./csvData/2020/elpaty.csv",
-      elcand:  "./csvData/2020/elcand.csv",
-    }
-  };
   const getCsvData = async (year, name) => {
     let csvData = "";
-    const csvUrl = _.get(urlList, `${year}.${name}`);
+    const csvUrl = `./csvData/${year}/${name}.csv`;
     await new Promise((resolve) => {
       fetch(csvUrl)
         .then((res) => {
