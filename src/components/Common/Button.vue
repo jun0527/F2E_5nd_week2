@@ -15,7 +15,7 @@ const props = defineProps({
   <button
     type="button"
     :class="[
-      'flex justify-between items-center w-[88px] h-[35px]',
+      'flex justify-between items-center',
       'bg-darkBlue text-white',
       'px-[12px] py-[4px] rounded-[8px]',
       'hover:bg-blue_dark_hover active:bg-darkBlue_dark_hover disabled:bg-white_active disabled:text-white_dark_active'

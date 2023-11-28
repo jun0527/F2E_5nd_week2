@@ -16,6 +16,10 @@ const props = defineProps({
   width: {
     type: String,
     default: "156px"
+  },
+  maxWidth: {
+    type: String,
+    default: "auto"
   }
 });
 const emit = defineEmits(["update:modelValue"]);
@@ -46,7 +50,7 @@ const buttonVal = computed(() => {
           }
         ]"
         :disabled="!props.list || props.list.length === 0"
-        :style="{ width: props.width }"
+        :style="{ width: props.width, 'max-width': props.maxWidth }"
         @click="handleClick"
       >
         <!-- <span>{{ buttonVal }}</span> -->
