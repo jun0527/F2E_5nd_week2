@@ -31,7 +31,10 @@ const cityMapData = computed(() => {
 });
 </script>
 <template>
-  <div :class="['w-[510px] h-[700px] relative']" v-if="isLoadAllData">
+  <div
+    :class="['w-[344px] h-[472px] sm:w-[510px] sm:h-[700px] relative']"
+    v-if="isLoadAllData"
+  >
     <City v-for="city in cityMapData" :key="city.num" :data="city"></City>
   </div>
 </template>
