@@ -18,15 +18,20 @@ const hintData = [
 ];
 </script>
 <template>
-  <ul>
+  <ul
+    :class="[
+      'flex justify-start sm:justify-center lg:block',
+      'w-full overflow-x-auto'
+    ]"
+  >
     <li
       v-for="hint in hintData"
       :key="hint.id"
       :class="[
-        'w-full h-[249px] bg-darkBlue_light_hover',
-        'flex flex-col justify-between',
+        'w-[260px] h-[249px] bg-darkBlue_light_hover',
+        'flex flex-col justify-between flex-none',
         'rounded-[8px]',
-        'p-[20px] mb-[20px]'
+        'p-[20px] mr-[20px] last:mr-0 lg:mb-[20px] lg:last:mb-0 lg:mr-0'
       ]"
     >
       <div>

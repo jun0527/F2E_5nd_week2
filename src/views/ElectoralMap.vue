@@ -20,7 +20,7 @@ onMounted(async () => {
 <template>
   <div
     :class="[
-      'max-w-[1024px] xl:max-w-[1440px]',
+      'max-w-[685px] lg:max-w-[1024px] xl:max-w-[1440px]',
       'px-[24px] py-[20px] md:px-[48px] md:py-[40px] mx-auto'
     ]"
   >
@@ -38,11 +38,15 @@ onMounted(async () => {
     </div>
     <TaiwanOptions :class="['mb-[20px]']"></TaiwanOptions>
     <VoteOverview :class="['block xl:hidden']"></VoteOverview>
-    <div :class="['flex justify-between']">
+    <div
+      :class="[
+        'flex flex-col lg:flex-row justify-between items-center lg:items-start'
+      ]"
+    >
       <VoteOverview :class="['hidden xl:block']"></VoteOverview>
-      <TaiwanMap></TaiwanMap>
-      <HintArea v-if="!city" :class="['w-[260px]']"></HintArea>
-      <ViewVoteArea v-else :class="['w-[260px]']"></ViewVoteArea>
+      <TaiwanMap :class="['mb-[20px] lg:mb-0']"></TaiwanMap>
+      <HintArea v-if="!city" :class="['w-full lg:w-[260px]']"></HintArea>
+      <ViewVoteArea v-else :class="['w-full lg:w-[260px]']"></ViewVoteArea>
     </div>
   </div>
 </template>
