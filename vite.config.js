@@ -8,7 +8,7 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/F2E_5nd_week2',
+  base: '/F2E_5nd_week2/',
   plugins: [
     vue(),
     vueJsx(),
