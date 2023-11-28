@@ -2,7 +2,7 @@
 import Dropdown from "../Common/Dropdown.vue";
 import SvgIcon from "../Common/SvgIcon.vue";
 import TextTruncate from "../Common/TextTruncate.vue";
-import { computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import _ from "lodash";
 const props = defineProps({
   list: {
@@ -33,11 +33,21 @@ const buttonVal = computed(() => {
   const data = _.find(props.list, item => item.num === model.value);
   return data ? data.name : "請選擇";
 });
+const dropdownBtn = ref(null);
+const listWidth = ref(0);
+const handleResize = () => {
+  listWidth.value = dropdownBtn.value.clientWidth;
+};
+window.addEventListener("resize", handleResize);
+onMounted(() => {
+  listWidth.value = dropdownBtn.value.clientWidth;
+});
 </script>
 <template>
   <Dropdown>
     <template #button="{ isExtend, handleClick }">
       <button
+        ref="dropdownBtn"
         type="button"
         :class="[
           'flex justify-between items-center',
@@ -66,7 +76,7 @@ const buttonVal = computed(() => {
       </button>
     </template>
     <ul
-      :style="{ width: props.width }"
+      :style="{ width: `${listWidth}px`, 'max-width': props.maxWidth }"
       :class="[
         'max-h-[216px] overflow-y-auto',
         'bg-white',
