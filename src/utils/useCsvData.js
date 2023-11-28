@@ -16,9 +16,7 @@ export default function useCsvData() {
         });
     });
     return csvData;
-    // resolve(csvData);
   };
-  // const csvToArray
   const getIndex = (array, num) => {
     return _.findIndex(array, (item) => item.num === num);
   };
