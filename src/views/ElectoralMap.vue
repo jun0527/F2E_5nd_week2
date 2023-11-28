@@ -18,7 +18,12 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div :class="['px-[48px] py-[40px]']">
+  <div
+    :class="[
+      'max-w-[1024px] xl:max-w-[1440px]',
+      'px-[24px] py-[20px] md:px-[48px] md:py-[40px] mx-auto'
+    ]"
+  >
     <div :class="['mb-[20px]']">
       <TabButton
         :active="year === '2020'"
@@ -32,8 +37,9 @@ onMounted(async () => {
       </TabButton>
     </div>
     <TaiwanOptions :class="['mb-[20px]']"></TaiwanOptions>
+    <VoteOverview :class="['block xl:hidden']"></VoteOverview>
     <div :class="['flex justify-between']">
-      <VoteOverview></VoteOverview>
+      <VoteOverview :class="['hidden xl:block']"></VoteOverview>
       <TaiwanMap></TaiwanMap>
       <HintArea v-if="!city" :class="['w-[260px]']"></HintArea>
       <ViewVoteArea v-else :class="['w-[260px]']"></ViewVoteArea>
